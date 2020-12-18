@@ -1,0 +1,4 @@
+﻿  Game.cpp
+C:\Users\Nice\Desktop\C++ Projects\Game Project\PropHuntGame\PropHuntGame\Game.cpp(81,2): warning C4551: function call missing argument list
+C:\Users\Nice\Desktop\C++ Projects\Game Project\PropHuntGame\PropHuntGame\Game.cpp(82,2): warning C4551: function call missing argument list
+  PropHuntGame.vcxproj -> C:\Users\Nice\Desktop\C++ Projects\Game Project\PropHuntGame\x64\Debug\PropHuntGame.exe

@@ -1,0 +1,15 @@
+
+=================================================== Read me Section Below ===================================================
+*Place Read me Text Here*
+
+=============================================================================================================================
+
+
+
+==========================================================  Notes  ==========================================================
+
+The header declares "what" a class (or whatever is being implemented) will do, while the cpp file defines "how" it will perform those features.
+
+When referencing a header do not do headername.h its actually headername_h, idk why visual code cant take the dot but oh well...
+
+=============================================================================================================================
