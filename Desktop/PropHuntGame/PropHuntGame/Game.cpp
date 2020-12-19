@@ -1,15 +1,25 @@
 #include "Game.h"
 #include <iostream>
+#include "TextureManager.h"
+#include "GameObject.h"
+#include "Map.h"
 
-SDL_Texture* playerTex;
-SDL_Rect srcRect, destRect;
+//Maps
+Map* map;
 
-Game::Game() {					//Game Constructor
+//Game Objects
+GameObject* player;
+GameObject* enemy;
+
+SDL_Renderer* Game::renderer = nullptr;		//nullptr because SDL has not been intilized yet, it will be reassigned later
+
+
+Game::Game() {								//Game Constructor
 	
 }
 
 
-Game::~Game() {					//Game Deconstructor
+Game::~Game() {								//Game Deconstructor
 		
 }
 
@@ -22,7 +32,7 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 	}
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {									//Checks if SDL is initlized before running game
-		std::cout << "SDL systems are intilized!" << std::endl;					//Check message for debugging purposes
+		std::cout << "SDL systems are Intilized!" << std::endl;					//Check message for debugging purposes
 		window = SDL_CreateWindow(title, x, y, width, height, flags);
 
 		if (window) {
@@ -40,10 +50,12 @@ void Game::init(const char* title, int x, int y, int width, int height, bool ful
 		isRunning = false;														//Stops everything if the checks are not correct.
 	}
 
-	SDL_Surface* tmpSurface = IMG_Load("assets/Sitckman.png");					//Texture needs surface, once surface is made, texture dont need it
-	playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-	SDL_FreeSurface(tmpSurface);												//Destroys Surface
+	//Place Map Assets below
+	map = new Map();
 
+	//Place Game assets below
+	player = new GameObject("assets/Sitckman.png", 0, 0);
+	enemy = new GameObject("assets/Sitckman.png", 100, 100);
 
 }
 
@@ -63,21 +75,20 @@ void Game::handleEvents() {		// Game Event Handler
 }
 
 void Game::update() {										// Game update function
-	count++;
-	destRect.h = 64;
-	destRect.w = 64;
-	destRect.x = count;
-	std::cout << count << std::endl;
+	player->Update();
+	enemy->Update();
 }
 
 void Game::render() {										// Game render function ****Note*** Background needs to be rendered first as it needs to be layered on top of things
 	SDL_RenderClear(renderer);
 	//Add stuff to render...
-	SDL_RenderCopy(renderer, playerTex, NULL, &destRect);	//Source Rectangle would use entire image, Destination Rectangle asks where to place the texture on screen. 
+	map->DrawMap();
+	player->Render();
+	enemy->Render();
 	SDL_RenderPresent(renderer);							//Pushes Rendered stuff to window
 }
 
-void Game::clean() {	//Game Clean function, termination protocol
+void Game::clean() {										//Game Clean function, termination protocol
 	SDL_DestroyWindow;
 	SDL_DestroyRenderer;
 	SDL_QUIT;

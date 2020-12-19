@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
 
 	game = new Game();
 
-	game-> init("YorkEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1440, 900, false);
+	game-> init("YorkEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
 	while (game->running()) {						//This is our game loop.
 
